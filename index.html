@@ -87,7 +87,14 @@ const games = [
 {name:"Crossy Road", url:"https://crossyroadgame.com/", cat:"action"},
 {name:"Slither.io", url:"https://slither.io/", cat:"action"}
 ];
-
+// 🔥 توليد 50 لعبة إضافية
+for(let i=1;i<=50;i++){
+  games.push({
+    name:"Fun Game " + i,
+    url:"https://playsnake.org/",
+    cat: i % 2 === 0 ? "action" : "puzzle"
+  });
+}
 // توليد ألعاب إضافية
 for(let i=1;i<=20;i++){
   games.push({
