@@ -1,88 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mini Game Hub Pro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Game Hub Pro</title>
 
-  <!-- 🔥 ضع كود Monetag هنا -->
-  <!-- <script src="PUT-YOUR-AD-CODE-HERE"></script> -->
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b1220;
+  color: white;
+}
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial;
-      background: #0b1220;
-      color: white;
-    }
+header {
+  background: #111827;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
 
-    header {
-      background: #111827;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
+.top-bar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-    .top-bar {
-      display: flex;
-      gap: 10px;
-      padding: 10px;
-      justify-content: center;
-      background: #0f172a;
-      flex-wrap: wrap;
-    }
+input, select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
 
-    input, select {
-      padding: 10px;
-      border-radius: 8px;
-      border: none;
-      width: 200px;
-    }
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 20px;
-    }
+.game-card {
+  background: #1f2937;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    .game-card {
-      background: #1f2937;
-      padding: 15px;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .game-card:hover {
-      transform: scale(1.05);
-      background: #374151;
-    }
-
-    .game-box {
-      display: none;
-      padding: 20px;
-    }
-
-    iframe {
-      width: 100%;
-      height: 80vh;
-      border: none;
-      border-radius: 10px;
-    }
-
-    .back-btn {
-      background: red;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 10px;
-    }
-  </style>
+.game-card:hover {
+  transform: scale(1.05);
+  background: #374151;
+}
+</style>
 </head>
 
 <body>
@@ -93,7 +66,6 @@
   <input type="text" id="search" placeholder="Search..." oninput="renderGames()">
   <select id="category" onchange="renderGames()">
     <option value="all">All</option>
-    <option value="car">Cars</option>
     <option value="action">Action</option>
     <option value="puzzle">Puzzle</option>
   </select>
@@ -101,36 +73,27 @@
 
 <div id="home" class="container"></div>
 
-<div id="gameBox" class="game-box">
-  <button class="back-btn" onclick="goBack()">⬅ Back</button>
-  <iframe id="gameFrame"></iframe>
-</div>
-
 <script>
 
 const games = [
-{name:"Moto X3M", url:"https://www.crazygames.com/embed/moto-x3m", cat:"car"},
-{name:"Stunt Car", url:"https://www.crazygames.com/embed/stunt-car-challenge", cat:"car"},
-{name:"Drift Hunters", url:"https://www.crazygames.com/embed/drift-hunters", cat:"car"},
-{name:"Madalin Cars", url:"https://www.crazygames.com/embed/madalin-cars-multiplayer", cat:"car"},
-
-{name:"Basketball Stars", url:"https://www.crazygames.com/embed/basketball-stars", cat:"action"},
-{name:"Run 3", url:"https://www.crazygames.com/embed/run-3", cat:"action"},
-{name:"Stickman Hook", url:"https://www.crazygames.com/embed/stickman-hook", cat:"action"},
-{name:"Subway Surfers", url:"https://www.crazygames.com/embed/subway-surfers", cat:"action"},
-
-{name:"2048", url:"https://www.crazygames.com/embed/2048", cat:"puzzle"},
-{name:"Sudoku", url:"https://www.crazygames.com/embed/sudoku", cat:"puzzle"},
-{name:"Chess", url:"https://www.crazygames.com/embed/chess", cat:"puzzle"},
-{name:"Bubble Shooter", url:"https://www.crazygames.com/embed/bubble-shooter", cat:"puzzle"}
+{name:"2048", url:"https://play2048.co/", cat:"puzzle"},
+{name:"Tetris", url:"https://tetris.com/play-tetris", cat:"puzzle"},
+{name:"Snake", url:"https://playsnake.org/", cat:"puzzle"},
+{name:"Pacman", url:"https://freepacman.org/", cat:"action"},
+{name:"Flappy Bird", url:"https://flappybird.io/", cat:"action"},
+{name:"Sudoku", url:"https://sudoku.com/", cat:"puzzle"},
+{name:"Chess", url:"https://www.chess.com/play/computer", cat:"puzzle"},
+{name:"Minesweeper", url:"https://minesweeperonline.com/", cat:"puzzle"},
+{name:"Crossy Road", url:"https://crossyroadgame.com/", cat:"action"},
+{name:"Slither.io", url:"https://slither.io/", cat:"action"}
 ];
 
-// 🔥 توليد ألعاب إضافية تلقائياً
-for(let i=1;i<=30;i++){
+// توليد ألعاب إضافية
+for(let i=1;i<=20;i++){
   games.push({
     name:"Extra Game " + i,
-    url:"https://www.crazygames.com/embed/moto-x3m",
-    cat:"car"
+    url:"https://playsnake.org/",
+    cat:"action"
   });
 }
 
@@ -148,21 +111,12 @@ function renderGames(){
       const div = document.createElement("div");
       div.className = "game-card";
       div.innerText = g.name;
-      div.onclick = () => openGame(g.url);
+
+      // 🔥 الحل: فتح اللعبة في صفحة جديدة
+      div.onclick = () => window.open(g.url, "_blank");
+
       home.appendChild(div);
     });
-}
-
-function openGame(url){
-  document.getElementById("home").style.display = "none";
-  document.getElementById("gameBox").style.display = "block";
-  document.getElementById("gameFrame").src = url;
-}
-
-function goBack(){
-  document.getElementById("home").style.display = "grid";
-  document.getElementById("gameBox").style.display = "none";
-  document.getElementById("gameFrame").src = "";
 }
 
 renderGames();
